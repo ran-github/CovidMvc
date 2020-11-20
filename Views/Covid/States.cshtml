@@ -1,0 +1,346 @@
+﻿@model IEnumerable<CovidMvc.Models.StatesCovidModel>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CheckTimeEt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CommercialScore)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataQualityGrade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateChecked)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateModified)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Death)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeathConfirmed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeathIncrease)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeathProbable)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fips)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Grade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hash)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hospitalized)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HospitalizedCumulative)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HospitalizedCurrently)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HospitalizedIncrease)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InIcuCumulative)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InIcuCurrently)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastUpdateEt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Negative)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NegativeIncrease)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NegativeRegularScore)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NegativeScore)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NegativeTestsAntibody)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NegativeTestsPeopleAntibody)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NegativeTestsViral)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OnVentilatorCumulative)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OnVentilatorCurrently)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pending)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Positive)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PositiveCasesViral)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PositiveIncrease)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PositiveScore)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PositiveTestsAntibody)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PositiveTestsAntigen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PositiveTestsPeopleAntibody)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PositiveTestsPeopleAntigen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PositiveTestsViral)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PosNeg)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProbableCases)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Recovered)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Score)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestEncountersViral)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestResults)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestResultsIncrease)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestResultsSource)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestsAntibody)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestsAntigen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestsPeopleAntibody)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestsPeopleAntigen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestsPeopleViral)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestsViral)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CheckTimeEt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CommercialScore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataQualityGrade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateChecked)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateModified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Death)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeathConfirmed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeathIncrease)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeathProbable)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fips)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Grade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hash)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hospitalized)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HospitalizedCumulative)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HospitalizedCurrently)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HospitalizedIncrease)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InIcuCumulative)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InIcuCurrently)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdateEt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Negative)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NegativeIncrease)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NegativeRegularScore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NegativeScore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NegativeTestsAntibody)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NegativeTestsPeopleAntibody)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NegativeTestsViral)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OnVentilatorCumulative)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OnVentilatorCurrently)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pending)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Positive)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositiveCasesViral)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositiveIncrease)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositiveScore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositiveTestsAntibody)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositiveTestsAntigen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositiveTestsPeopleAntibody)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositiveTestsPeopleAntigen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositiveTestsViral)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PosNeg)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProbableCases)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Recovered)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Score)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestEncountersViral)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestResults)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestResultsIncrease)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestResultsSource)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestsAntibody)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestsAntigen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestsPeopleAntibody)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestsPeopleAntigen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestsPeopleViral)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestsViral)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

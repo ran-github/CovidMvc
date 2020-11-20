@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "Current US";
+}
+
+@model IEnumerable<CovidMvc.Models.CurrentModel>;
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Death)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeathIncrease)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hash)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hospitalized)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HospitalizedCumulative)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HospitalizedCurrently)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InICUCumulative)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InICUCurrently)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastModified)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Negative)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NegativeIncrease)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OnVentilatorCumulative)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OnVentilatorCurrently)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pending)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Positive)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PositiveIncrease)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Recovered)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.States)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestResults)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTestResultsIncrease)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Death)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeathIncrease)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hash)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hospitalized)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HospitalizedCumulative)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HospitalizedCurrently)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InICUCumulative)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InICUCurrently)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastModified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Negative)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NegativeIncrease)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OnVentilatorCumulative)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OnVentilatorCurrently)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pending)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Positive)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PositiveIncrease)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Recovered)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.States)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestResults)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTestResultsIncrease)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

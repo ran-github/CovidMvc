@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using CovidMvc.Models;
+
+@model CovidMvc.Models.StatesCovidEntities
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>States</title>
+</head>
+<body>
+    <h4>State Covid Infections</h4>
+    <hr />
+    <table class="table" cellpadding="2" cellspacing="2">
+        <thead>
+            <tr>
+                <th> Date</th>
+                <th>State</th>
+                <th>Death</th>
+                <th>Hospitalized</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (StatesCovidModel s in Model.StatesCovid)
+            {
+                <tr>
+                    <td>@s.Date</td>
+                    <td>@s.State</td>
+                    <td>@s.Death</td>
+                    <td>@s.Hospitalized</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

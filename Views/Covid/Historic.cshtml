@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CovidMvc.Models.USCovidModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Death)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HospitalizedCumulative)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InICUCumulative)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Negative)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnVentilatorCumulative)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pending)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Positive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recovered)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Death)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HospitalizedCumulative)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InICUCumulative)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Negative)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OnVentilatorCumulative)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pending)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Positive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Recovered)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

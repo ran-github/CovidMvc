@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using CovidMvc.Models;
+
+@model CovidMvc.Models.StatesCovidEntities
+
+    <h2>State Covid Infections</h2>
+    <hr />
+    @using (Html.BeginForm("MyStates"))
+    {
+        @Html.DropDownList("state", Model.USStates, "ALL", new { onchange = "this.form.submit();" })
+    }
+
+    <hr />
+    <table class="table">
+        <thead>
+            <tr style= "text-align: center; background-color: black; color: lightskyblue;">
+                <th>
+                    @Html.DisplayNameFor(Model => Model.StatesCovid[0].Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.StatesCovid[0].State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.StatesCovid[0].Death)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.StatesCovid[0].Hospitalized)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.StatesCovid[0].InIcuCurrently)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.StatesCovid[0].OnVentilatorCurrently)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (StatesCovidModel s in Model.StatesCovid)
+            {
+                <tr style="color:midnightblue; ">
+                    <td>@s.Date</td>
+                    <td>@s.State</td>
+                    <td>@s.Death</td>
+                    <td>@s.Hospitalized</td>
+                    <td>@s.InIcuCurrently</td>
+                    <td>@s.OnVentilatorCurrently</td>
+                </tr>
+            }
+        </tbody>
+    </table>
