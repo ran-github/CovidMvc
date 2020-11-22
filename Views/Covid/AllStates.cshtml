@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+    DropDownListFor
+    When using DropDownListFor, the first parameter is the property where your selected value is stored once you
+    submit the form. So, in your case, you should have a SelectedOrderId as part of your model or something like
+    that, in order to use it in this way:
+    Example:
+    @Html.DropDownListFor(n => n.SelectedOrderId, new SelectList(Model.OrderTemplates, "OrderTemplateId", "OrderTemplateName", 1),
+        "Please select an order template")
+*@
+
+@using CovidMvc.Models;
+
+@model CovidMvc.Models.StatesCovidEntities
+
+
+
+@*@using (Html.BeginForm("StateHistoric", "Covid"))*@
+@*@using (Html.BeginForm("StateHistoric", "Covid", FormMethod.Post))*@
+@using (Html.BeginForm("AllStates", "Covid", FormMethod.Post)) 
+{
+    <div class="form-horizontal">
+        <h2>State Covid Infections</h2>
+        <hr />
+        @Html.LabelFor(model => model.USStates, "Select a state: ", new { @class = "states-ddl-label" })
+        @*@Html.DropDownList("state", model => model.USStates, "ALL", new { onchange = "this.form.submit();" })*@
+        @Html.DropDownListFor(model => model.SelectedState, Model.USStates, "All")
+        @if (@Model.USStates != null && @Model.USStates.Count > 0)
+        {
+            @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.StartDate, new { @class = "date-picker" })
+            @Html.ValidationMessageFor(model => model.StartDate)
+
+            @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "date-picker" } })
+            @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            <input type="submit" value="Submit" class="btn-default" />
+        }
+    </div>
+}
+
+<hr />
+<table class="table">
+    <thead>
+        <tr style="text-align: center; background-color: black; color: lightskyblue;">
+            <th>
+                @Html.DisplayNameFor(Model => Model.StatesCovid[0].DTDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.StatesCovid[0].State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.StatesCovid[0].Death)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.StatesCovid[0].Hospitalized)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.StatesCovid[0].InIcuCurrently)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.StatesCovid[0].OnVentilatorCurrently)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (StatesCovidModel s in Model.StatesCovid)
+        {
+            <tr style="color:midnightblue; ">
+                <td>@s.DTDate</td>
+                <td>@s.State</td>
+                <td>@s.Death</td>
+                <td>@s.Hospitalized</td>
+                <td>@s.InIcuCurrently</td>
+                <td>@s.OnVentilatorCurrently</td>
+            </tr>
+        }
+    </tbody>
+</table>

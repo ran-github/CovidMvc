@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+
+using CovidMvc.Helpers;
 
 namespace CovidMvc.Models
 {
@@ -14,8 +18,19 @@ namespace CovidMvc.Models
         public int CommercialScore { get; set; }
         [DisplayName("DataQualityGrade")]
         public string DataQualityGrade { get; set; }
-        [DisplayName("Date")]
+        [DisplayName("Int Date")]
         public int Date { get; set; }
+
+        [DisplayName("Date")]
+        [DataType(DataType.Date)]
+        public string DTDate
+        {
+            get
+            {
+                return (Helper.GetDateFromInt(this.Date)).ToString("MM/dd/yyyy");
+            }
+        }
+
         [DisplayName("DateChecked")]
         public string DateChecked { get; set; }
         [DisplayName("DateModified")]

@@ -8,7 +8,7 @@
 
     <h2>State Covid Infections</h2>
     <hr />
-    @using (Html.BeginForm("MyStates"))
+    @using (Html.BeginForm("StateHistoric"))
     {
         @Html.DropDownList("state", Model.USStates, "ALL", new { onchange = "this.form.submit();" })
     }

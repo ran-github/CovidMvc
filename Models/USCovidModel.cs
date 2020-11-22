@@ -1,15 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+
+using CovidMvc.Helpers;
 
 namespace CovidMvc.Models
 {
     public class USCovidModel
     {
-        [DisplayName("Date")]
+        [DisplayName("Int Date")]
         public int Date { get; set; }
+
+        [DisplayName("Date")]
+        [DataType(DataType.Date)]
+        public string DTDate
+        {
+            get
+            {
+                var dt = Helper.GetDateFromInt(this.Date);
+                return dt.ToString("MM/dd/yyyy");
+            }
+        }
 
         [DisplayName("DateChecked")]
         public string DateChecked { get; set; }

@@ -60,7 +60,7 @@ namespace CovidMvc.Controllers
         {
             try
             {
-                this.usCovidList = Helper.HttpRequestUS(this._usUrl);
+                this.usCovidList = HtmlHelper.HttpRequestUS(this._usUrl);
             }
             catch (Exception ex)
             {
@@ -74,7 +74,7 @@ namespace CovidMvc.Controllers
         {
             try
             {
-                this.usCovidList = Helper.HttpRequestUS(this._usHistoricUrl);
+                this.usCovidList = HtmlHelper.HttpRequestUS(this._usHistoricUrl);
             }
             catch (Exception ex)
             {
@@ -88,7 +88,7 @@ namespace CovidMvc.Controllers
         {
             try
             {
-                this.statesCovidList = Helper.HttpRequestStates(this._statesUrl);
+                this.statesCovidList = HtmlHelper.HttpRequestStates(this._statesUrl);
             }
             catch (Exception ex)
             {
@@ -98,56 +98,58 @@ namespace CovidMvc.Controllers
         }
 
         [HttpGet]
-        public ActionResult MyStates()
+        public ActionResult AllStates()
         {
-            this.allStates = Helper.HttpRequestAllStates(this._statesUrl);
+            this.allStates = HtmlHelper.HttpRequestAllStates(this._statesUrl);
             return View(allStates);
+        }
+
+
+        [HttpPost]
+        public ActionResult AllStates(StatesCovidEntities covidEntities)
+        {
+            var getAllStates = HtmlHelper.HttpRequestAllStates(this._statesUrl);
+            if (!string.IsNullOrEmpty(covidEntities.SelectedState) && !covidEntities.SelectedState.ToUpper().Equals(Constant.ALL))
+            {
+                var url = string.Concat(this._baseUrl, this._configuration.GetValue<string>(string.Format("{0}:{1}", Constant.WEBAPI, Constant.SINGLESTATEHISTORIC)));
+                this._singleStateHistoricUrl = string.Format(url, covidEntities.SelectedState);
+                var singleStateHistoric = HtmlHelper.HttpRequestHistoricSingleState(this._singleStateHistoricUrl);
+
+                //this.allStates.StatesCovid = singleStateHistoric.StatesCovid.Select(x => (x.Date >= Helper.GetIntFromDate(covidEntities.StartDate) && x.Date <= Helper.GetIntFromDate(covidEntities.EndDate))).ToList<StatesCovidModel>();
+                this.allStates.StatesCovid = singleStateHistoric.StatesCovid.Where(x => (x.Date >= Helper.GetIntFromDate(covidEntities.StartDate) && x.Date <= Helper.GetIntFromDate(covidEntities.EndDate))).Select(x => x).ToList<StatesCovidModel>();
+                //this.allStates.StatesCovid = (from cState in singleStateHistoric.StatesCovid
+                //                                where cState.Date >= Helper.GetIntFromDate(covidEntities.StartDate) && cState.Date <= Helper.GetIntFromDate(covidEntities.EndDate)
+                //                                select cState).ToList<StatesCovidModel>();
+                this.allStates.USStates.Clear();
+                this.allStates.USStates = getAllStates.USStates.ToList<SelectListItem>();
+            }
+            else
+            {
+                this.allStates = getAllStates;
+            }
+            return View(this.allStates);
+        }
+
+        [HttpGet]
+        public ActionResult StateHistoric()
+        {
+            return this.AllStates();
         }
 
         [HttpPost]
-        public ActionResult MyStates(string state)
+        public ActionResult StateHistoric(StatesCovidEntities covidEntities)
         {
-            this.allStates = Helper.HttpRequestAllStates(this._statesUrl);
-            if(!string.IsNullOrEmpty(state) && !state.ToUpper().Equals(Constant.ALL))
-            {
-                StatesCovidModel s = this.allStates.StatesCovid.First(x => x.State.Equals(state));
-                this.allStates.StatesCovid.Clear();
-                this.allStates.StatesCovid.Add(s);
-            }
-            return View(allStates);
+            var getAllStates = HtmlHelper.HttpRequestAllStates(this._statesUrl);
+            //if (!string.IsNullOrEmpty(state) && !state.ToUpper().Equals(Constant.ALL))
+            //{
+            //    var url = string.Concat(this._baseUrl, this._configuration.GetValue<string>(string.Format("{0}:{1}", Constant.WEBAPI, Constant.SINGLESTATEHISTORIC)));
+            //    this._singleStateHistoricUrl = string.Format(url, state);
+            //    this.allStates = Helper.HttpRequestHistoricSingleState(this._singleStateHistoricUrl);
+            //    this.allStates.USStates.Clear();
+            //    this.allStates.USStates = getAllStates.USStates.ToList<SelectListItem>();
+            //}
+            this.allStates = getAllStates;
+            return View(this.allStates);
         }
-
-        //[HttpGet]
-        //public ActionResult StateHistoric()
-        //{
-        //    return this.MyStates();
-        //}
-
-        //[HttpPost]
-        //public ActionResult StateHistoric(string state)
-        //{
-        //    if (!string.IsNullOrEmpty(state) && !state.ToUpper().Equals(Constant.ALL))
-        //    {
-        //        var url = string.Concat(this._baseUrl, this._configuration.GetValue<string>(string.Format("{0}:{1}", Constant.WEBAPI, Constant.SINGLESTATEHISTORIC)));
-        //        this._singleStateHistoricUrl = string.Concat(this._baseUrl, string.Format(url, state));
-        //        this.allStates = Helper.HttpRequestHistoricStates(this._singleStateHistoricUrl);
-        //        var s = from sc in this.allStates.StatesCovid where sc.State == state select sc;
-        //        this.allStates.StatesCovid.Clear();
-        //        if (s != null && s.Count<StatesCovidModel>() > 0)
-        //        {
-        //            this.allStates.StatesCovid = s.ToList<StatesCovidModel>();
-        //        }
-        //        else
-        //        {
-        //            this.MyStates();
-        //            this.allStates.StatesCovid.Clear();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        this.MyStates();
-        //    }
-        //    return View(allStates);
-        //}
     }
 }

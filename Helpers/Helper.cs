@@ -1,92 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
-
-using CovidMvc.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json;
 
 namespace CovidMvc.Helpers
 {
     public class Helper
     {
-        public static string HttpRequestData(string url)
+        public static DateTime GetDateFromInt(int dtValue)
         {
-            string data = string.Empty;
+            var dt = DateTime.MinValue;
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    var response = client.GetAsync(url).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        data = response.Content.ReadAsStringAsync().Result;
-
-                    }
-                }
+                dt = DateTime.ParseExact(dtValue.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return data;
+            return dt.Date;
         }
 
-        public static List<USCovidModel> HttpRequestUS(string url)
+        public static int GetIntFromDate(DateTime dtValue)
         {
-            List<USCovidModel> usCovidList = new List<USCovidModel>();
-
-            string data = HttpRequestData(url);
-            JsonSerializerSettings jSettings = new JsonSerializerSettings();
-            jSettings.NullValueHandling = NullValueHandling.Ignore;
-            usCovidList = JsonConvert.DeserializeObject<List<USCovidModel>>(data, jSettings);
-            return usCovidList;
+            return int.Parse(dtValue.ToString("yyyyMMdd"));
         }
-
-        public static List<StatesCovidModel> HttpRequestStates(string url)
-        {
-            List<StatesCovidModel> statesCovidList = new List<StatesCovidModel>();
-
-            string data = HttpRequestData(url);
-            JsonSerializerSettings jSettings = new JsonSerializerSettings();
-            jSettings.NullValueHandling = NullValueHandling.Ignore;
-            statesCovidList = JsonConvert.DeserializeObject<List<StatesCovidModel>>(data, jSettings);
-            return statesCovidList;
-        }
-
-        public static List<StatesCovidModel> HttpRequestSingleState(string url, int index)
-        {
-            var statesList = HttpRequestStates(url);
-            List<StatesCovidModel> indivState = new List<StatesCovidModel>();
-            indivState.Add(statesList[index]);
-            return indivState;
-        }
-
-        public static StatesCovidEntities HttpRequestAllStates(string url)
-        {
-            StatesCovidEntities stateEntities = new StatesCovidEntities();
-            string data = HttpRequestData(url);
-            JsonSerializerSettings jSettings = new JsonSerializerSettings();
-            jSettings.NullValueHandling = NullValueHandling.Ignore;
-            stateEntities.StatesCovid = JsonConvert.DeserializeObject<List<StatesCovidModel>>(data, jSettings);
-            stateEntities.USStates = (from s in stateEntities.StatesCovid
-                                      select new SelectListItem { Text = s.State, Value = s.State }).Distinct().ToList();
-            return stateEntities;
-        }
-
-        public static StatesCovidEntities HttpRequestHistoricStates(string url)
-        {
-            StatesCovidEntities stateEntities = new StatesCovidEntities();
-            string data = HttpRequestData(url);
-            JsonSerializerSettings jSettings = new JsonSerializerSettings();
-            jSettings.NullValueHandling = NullValueHandling.Ignore;
-            stateEntities.StatesCovid = JsonConvert.DeserializeObject<List<StatesCovidModel>>(data, jSettings);
-            stateEntities.USStates = (from s in stateEntities.StatesCovid
-                                      select new SelectListItem { Text = s.State, Value = s.State }).Distinct().ToList();
-            return stateEntities;
-        }
-
     }
 }
