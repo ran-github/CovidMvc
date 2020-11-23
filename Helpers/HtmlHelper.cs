@@ -34,6 +34,17 @@ namespace CovidMvc.Helpers
             return data;
         }
 
+        public static USCovidEntities HttpRequestAllUS(string url)
+        {
+            USCovidEntities usEntities = new USCovidEntities();
+            string data = HttpRequestData(url);
+            JsonSerializerSettings jSettings = new JsonSerializerSettings();
+            jSettings.NullValueHandling = NullValueHandling.Ignore;
+            usEntities.USCovid = JsonConvert.DeserializeObject<List<USCovidModel>>(data, jSettings);
+            return usEntities;
+        }
+
+
         public static List<USCovidModel> HttpRequestUS(string url)
         {
             List<USCovidModel> usCovidList = new List<USCovidModel>();
@@ -88,18 +99,5 @@ namespace CovidMvc.Helpers
                                       select new SelectListItem { Text = s.State, Value = s.State }).Distinct().ToList();
             return stateEntities;
         }
-
-        public static StatesCovidEntities HttpRequestHistoricStates(string url)
-        {
-            StatesCovidEntities stateEntities = new StatesCovidEntities();
-            string data = HttpRequestData(url);
-            JsonSerializerSettings jSettings = new JsonSerializerSettings();
-            jSettings.NullValueHandling = NullValueHandling.Ignore;
-            stateEntities.StatesCovid = JsonConvert.DeserializeObject<List<StatesCovidModel>>(data, jSettings);
-            stateEntities.USStates = (from s in stateEntities.StatesCovid
-                                      select new SelectListItem { Text = s.State, Value = s.State }).Distinct().ToList();
-            return stateEntities;
-        }
-
     }
 }

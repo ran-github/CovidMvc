@@ -2,9 +2,12 @@
 
 <table class="table">
     <thead>
-        <tr style= "text-align: center; background-color: black; color: lightskyblue;">
+        <tr style="text-align: center; background-color: black; color: lightskyblue;">
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                @Html.DisplayNameFor(model => model.DTDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.States)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Death)
@@ -16,13 +19,7 @@
                 @Html.DisplayNameFor(model => model.InICUCumulative)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Negative)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.OnVentilatorCumulative)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pending)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Positive)
@@ -33,10 +30,14 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @foreach (var item in Model)
+        {
+        <tr style="color:midnightblue; text-align: center;">
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @Html.DisplayFor(modelItem => item.DTDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.States)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Death)
@@ -48,13 +49,7 @@
                 @Html.DisplayFor(modelItem => item.InICUCumulative)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Negative)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.OnVentilatorCumulative)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pending)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Positive)
@@ -63,6 +58,6 @@
                 @Html.DisplayFor(modelItem => item.Recovered)
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

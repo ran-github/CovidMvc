@@ -26,17 +26,20 @@
         @Html.LabelFor(model => model.USStates, "Select a state: ", new { @class = "states-ddl-label" })
         @*@Html.DropDownList("state", model => model.USStates, "ALL", new { onchange = "this.form.submit();" })*@
         @Html.DropDownListFor(model => model.SelectedState, Model.USStates, "All")
+        <hr/>
+    <div>
         @if (@Model.USStates != null && @Model.USStates.Count > 0)
         {
             @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.StartDate, new { @class = "date-picker" })
+            @Html.EditorFor(model => model.StartDate, new { @class = "date-picker" });
             @Html.ValidationMessageFor(model => model.StartDate)
 
-            @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-2"  });
             @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "date-picker" } })
             @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             <input type="submit" value="Submit" class="btn-default" />
         }
+    </div>
     </div>
 }
 
@@ -67,7 +70,7 @@
     <tbody>
         @foreach (StatesCovidModel s in Model.StatesCovid)
         {
-            <tr style="color:midnightblue; ">
+            <tr style="color:midnightblue; text-align: center; " >
                 <td>@s.DTDate</td>
                 <td>@s.State</td>
                 <td>@s.Death</td>

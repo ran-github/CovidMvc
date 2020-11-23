@@ -40,7 +40,7 @@ namespace CovidMvc.Models
         [DisplayName("Hospitalized")]
         public int Hospitalized { get; set; }
 
-        [DisplayName("Cumulative hospitalized")]
+        [DisplayName("Cumulative Hospitalized")]
         public int HospitalizedCumulative { get; set; }
 
         [DisplayName("Currently hospitalized/Now hospitalized")]
@@ -49,10 +49,10 @@ namespace CovidMvc.Models
         [DisplayName("New total hospitalizations")]
         public int HospitalizedIncrease { get; set; }
 
-        [DisplayName("Cumulative in ICU/Ever in ICU")]
+        [DisplayName("Cumulative in ICU")]
         public int InICUCumulative { get; set; }
 
-        [DisplayName("Currently in ICU/Now in ICU")]
+        [DisplayName("ICU")]
         public int InICUCurrently { get; set; }
 
         [DisplayName("LastModified")]
@@ -64,16 +64,16 @@ namespace CovidMvc.Models
         [DisplayName("NegativeIncrease")]
         public int NegativeIncrease { get; set; }
 
-        [DisplayName("Cumulative on ventilator/Ever on ventilator")]
+        [DisplayName("Cumulative on Ventilator")]
         public int OnVentilatorCumulative { get; set; }
 
-        [DisplayName("Currently on ventilator/Now on ventilator")]
+        [DisplayName("Ventilator")]
         public int OnVentilatorCurrently { get; set; }
 
         [DisplayName("Pending")]
         public int Pending { get; set; } // tests pending
 
-        [DisplayName("Cases (confirmed plus probable)")]
+        [DisplayName("Positive Cases")]
         public int Positive { get; set; } // 
 
         [DisplayName("New cases")]
@@ -85,7 +85,7 @@ namespace CovidMvc.Models
         [DisplayName("Recovered")]
         public int Recovered { get; set; }
 
-        [DisplayName("States")]
+        [DisplayName("States Reported")]
         public int States { get; set; }
 
         [DisplayName("Total")]

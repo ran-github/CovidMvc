@@ -32,14 +32,7 @@ namespace CovidMvc.Controllers
         private StatesCovidModel singleState = new StatesCovidModel();
 
         private StatesCovidEntities allStates = new StatesCovidEntities();
-
-        //private List<StateModel> states = new List<StateModel>();
-
-        //private AllStates allStates = new AllStates();
-        //private StatesModel singleState = null;
-
-        //CurrentModel> currentUSCovid = new List<CurrentModel>(); 
-
+        private USCovidEntities allUS = new USCovidEntities();
 
         public CovidController(ILogger<USCovidModel> logger, IConfiguration configuration)
         {
@@ -49,7 +42,6 @@ namespace CovidMvc.Controllers
             this._usUrl = string.Concat(this._baseUrl, this._configuration.GetValue<string>(string.Format("{0}:{1}", Constant.WEBAPI, Constant.US)));
             this._usHistoricUrl = string.Concat(this._baseUrl, this._configuration.GetValue<string>(string.Format("{0}:{1}", Constant.WEBAPI, Constant.USHISTORIC)));
             this._statesUrl = string.Concat(this._baseUrl, this._configuration.GetValue<string>(string.Format("{0}:{1}", Constant.WEBAPI, Constant.STATES)));
-            //var url = string.Concat(this._baseUrl, this._configuration.GetValue<string>(string.Format("{0}:{1}", Constant.WEBAPI, Constant.SINGLESTATE)));
             this._statesHistoricUrl = string.Concat(this._baseUrl, this._configuration.GetValue<string>(string.Format("{0}:{1}", Constant.WEBAPI, Constant.STATESHISTORIC)));
 
         }
@@ -70,31 +62,18 @@ namespace CovidMvc.Controllers
         }
 
         [HttpGet]
-        public ActionResult Historic()
+        public ActionResult AllUS()
         {
-            try
-            {
-                this.usCovidList = HtmlHelper.HttpRequestUS(this._usHistoricUrl);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return View(this.usCovidList);
+            this.allUS = HtmlHelper.HttpRequestAllUS(this._usHistoricUrl);
+            return View(this.allUS);
         }
 
-        [HttpGet]
-        public ActionResult States()
+        [HttpPost]
+        public ActionResult AllUs(USCovidEntities covidEntities)
         {
-            try
-            {
-                this.statesCovidList = HtmlHelper.HttpRequestStates(this._statesUrl);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return View(this.statesCovidList);
+            var getAllUS = HtmlHelper.HttpRequestAllUS(this._usHistoricUrl);
+            this.allUS.USCovid = getAllUS.USCovid.Where(x => (x.Date >= Helper.GetIntFromDate(covidEntities.StartDate) && x.Date <= Helper.GetIntFromDate(covidEntities.EndDate))).Select(x => x).ToList<USCovidModel>();
+            return View(this.allUS);
         }
 
         [HttpGet]
@@ -115,11 +94,7 @@ namespace CovidMvc.Controllers
                 this._singleStateHistoricUrl = string.Format(url, covidEntities.SelectedState);
                 var singleStateHistoric = HtmlHelper.HttpRequestHistoricSingleState(this._singleStateHistoricUrl);
 
-                //this.allStates.StatesCovid = singleStateHistoric.StatesCovid.Select(x => (x.Date >= Helper.GetIntFromDate(covidEntities.StartDate) && x.Date <= Helper.GetIntFromDate(covidEntities.EndDate))).ToList<StatesCovidModel>();
                 this.allStates.StatesCovid = singleStateHistoric.StatesCovid.Where(x => (x.Date >= Helper.GetIntFromDate(covidEntities.StartDate) && x.Date <= Helper.GetIntFromDate(covidEntities.EndDate))).Select(x => x).ToList<StatesCovidModel>();
-                //this.allStates.StatesCovid = (from cState in singleStateHistoric.StatesCovid
-                //                                where cState.Date >= Helper.GetIntFromDate(covidEntities.StartDate) && cState.Date <= Helper.GetIntFromDate(covidEntities.EndDate)
-                //                                select cState).ToList<StatesCovidModel>();
                 this.allStates.USStates.Clear();
                 this.allStates.USStates = getAllStates.USStates.ToList<SelectListItem>();
             }
@@ -127,28 +102,6 @@ namespace CovidMvc.Controllers
             {
                 this.allStates = getAllStates;
             }
-            return View(this.allStates);
-        }
-
-        [HttpGet]
-        public ActionResult StateHistoric()
-        {
-            return this.AllStates();
-        }
-
-        [HttpPost]
-        public ActionResult StateHistoric(StatesCovidEntities covidEntities)
-        {
-            var getAllStates = HtmlHelper.HttpRequestAllStates(this._statesUrl);
-            //if (!string.IsNullOrEmpty(state) && !state.ToUpper().Equals(Constant.ALL))
-            //{
-            //    var url = string.Concat(this._baseUrl, this._configuration.GetValue<string>(string.Format("{0}:{1}", Constant.WEBAPI, Constant.SINGLESTATEHISTORIC)));
-            //    this._singleStateHistoricUrl = string.Format(url, state);
-            //    this.allStates = Helper.HttpRequestHistoricSingleState(this._singleStateHistoricUrl);
-            //    this.allStates.USStates.Clear();
-            //    this.allStates.USStates = getAllStates.USStates.ToList<SelectListItem>();
-            //}
-            this.allStates = getAllStates;
             return View(this.allStates);
         }
     }
